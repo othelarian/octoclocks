@@ -6,6 +6,7 @@ lst =
   arrl: 1779442200
 
 togDay = yes
+timer = null
 
 on2 = (v) -> if v < 10 then "0#{v}" else "#{v}"
 
@@ -41,15 +42,12 @@ update = ->
           rh - (tm*60)
         else rj
       elt.innerText = "#{j}#{h}#{m}#{on2(rm)}"
-  setTimeout update, (1000 - (new Date().getMilliseconds()))
+  timer = setTimeout update, (1000 - (new Date().getMilliseconds()))
 
 window.toggleDay = ->
-  #
-  console.log 'toggle'
-  #
-  #
+  clearTimeout timer
   togDay = not togDay
-  #
+  update()
 
 window.init = ->
   update()
